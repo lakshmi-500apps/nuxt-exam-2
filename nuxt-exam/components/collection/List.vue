@@ -3,22 +3,19 @@
     <!-- Add Question Form Starts Here -->
     <div class="sm:flex sm:items-center">
       <div class="sm:flex-auto">
-        <h1 class="text-base font-semibold leading-6 text-gray-900">Question Banks</h1>
+        <h1 class="text-base font-semibold leading-6 text-gray-900">
+          Question Banks
+        </h1>
       </div>
       <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
         <button
           type="button"
-          @click="openAddQuestionForm = true"
+          @click="openAddQuestionForm()"
           class="mt-2 block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
         >
           + Add Question
         </button>
       </div>
-      <CollectionAdd
-        :openAddQuestionForm="openAddQuestionForm"
-        @formData="saveFormData"
-        @cancel="cancel"
-      />
     </div>
     <!-- Add Question Form Ends Here -->
     <!-- Question Bank Table Starts Here -->
@@ -126,8 +123,12 @@
                 </th>
               </tr>
             </thead>
-            <tbody class="divide-y divide-gray-200" >
-              <tr v-for="question in getQuestionsList" :key="question.id" @click="openEditForm(question)">
+            <tbody class="divide-y divide-gray-200">
+              <tr
+                v-for="question in getQuestionsList"
+                :key="question.id"
+                @click="openViewForm(question)"
+              >
                 <td
                   class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0"
                 >
@@ -187,16 +188,11 @@
       </div>
     </div>
     <!-- Question Bank Table Ends Here -->
-    <CollectionEdit :openViewSidebar="openViewSidebar" :questionBankData="questionBankData" @cancel="cancel" />
   </div>
 </template>
 
 <script setup lang="ts">
 import { defineProps } from "vue";
-
-let openAddQuestionForm = ref(false);
-let openViewSidebar=ref(false)
-let questionBankData=ref({})
 
 // Define Props
 const props = defineProps({
@@ -204,23 +200,20 @@ const props = defineProps({
 });
 
 // Define Emits
-const emit = defineEmits(["formData"]);
+const emit = defineEmits([
+  "openAddQuestionForm",
+  "openViewForm",
+  "questionBankData",
+]);
 
-// Get Data from Add Question Sidebar
-const saveFormData = (data: any) => {
-  emit("formData", data);
-  openAddQuestionForm.value = false;
+// To Open Add form Sidebar
+const openAddQuestionForm = () => {
+  emit("openAddQuestionForm", true);
 };
 
-// Close Sidebar on clicking on Cancel
-const cancel = () => {
-  openAddQuestionForm.value = false;
-  openViewSidebar.value=false
+//  To View Selected Question Bank Data
+const openViewForm = (data: Object) => {
+  emit("questionBankData", data);
+  emit("openViewForm", true);
 };
-
-
-const openEditForm =(data:Object)=>{
-    openViewSidebar.value=true
-    questionBankData.value=data
-}
 </script>
