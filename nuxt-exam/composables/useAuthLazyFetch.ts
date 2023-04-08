@@ -7,7 +7,7 @@ export const useAuthLazyFetch = (request: any, options: any | undefined | null) 
     // Get Token from store or local storage
     let token =
 
-        'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InN3ZXRoYS5zYW5rYXRpQDUwMGFwcHMuY29tIiwidGVuYW50X2lkIjozMDc2NCwidXNlcl9pZCI6MTgyNTY3LCJzdWJzY3JpYmVkIjoibm8iLCJleHAiOiIxNjgxMjA0MzQ5IiwiZW52IjoiYXAxIn0.rR3z8RLse0XU-6Hu0WGby9oAT2ySLK8cF5XkSBtAiYc'
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1IjoiZGJhZWVkYmQzYmI2NGQ2ZDhkMzYwODhhYzAzM2E0MGEiLCJkIjoiMTY4MDA2NyIsInIiOiJzYSIsInAiOiJmcmVlIiwiYSI6ImZpbmRlci5pbyIsImwiOiJ1czEiLCJleHAiOjE2ODMyNzA5Mzl9.AdgaLskWHSxmOwXM8XDc72OOZAIUYXhdtju83py7C7w'
 
     if (!token) token = useCookie('token').value || ''
     if (!token) token = useCookie('token').value || ''
