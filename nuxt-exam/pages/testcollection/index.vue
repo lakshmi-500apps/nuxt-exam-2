@@ -1,5 +1,5 @@
 <template>
   <div>
-    <collectionMain />
+    <CollectionMain />
   </div>
 </template>
